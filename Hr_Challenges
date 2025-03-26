@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HR Department FAQ</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        nav { margin-bottom: 20px; }
+        nav a { margin-right: 15px; text-decoration: none; color: #007BFF; }
+        nav a:hover { text-decoration: underline; }
+        .hidden { display: none; }
+        .container { margin-top: 20px; }
+        button { padding: 10px; margin-top: 10px; }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="#" onclick="showPage('faq')">FAQ</a>
+    <a href="#" onclick="showPage('survey')">Survey</a>
+    <a href="#" onclick="showPage('schedule')">Schedule Meeting</a>
+</nav>
+
+<div class="container">
+    <!-- FAQ Home Page -->
+    <div id="faq" class="page">
+        <h2>Frequently Asked Questions</h2>
+        <p><strong>Q:</strong> How do I check my vacation balance?<br><strong>A:</strong> Log in to your employee portal to see your vacation hours.</p>
+        <p><strong>Q:</strong> When is open enrollment for health benefits?<br><strong>A:</strong> Open enrollment begins on October 15th each year.</p>
+    </div>
+
+    <!-- Survey Page -->
+    <div id="survey" class="page hidden">
+        <h2>Employee Satisfaction Survey</h2>
+        <p>How satisfied are you with HR services?</p>
+        <select id="surveyResponse">
+            <option>Very satisfied</option>
+            <option>Satisfied</option>
+            <option>Neutral</option>
+            <option>Dissatisfied</option>
+            <option>Very dissatisfied</option>
+        </select>
+        <br>
+        <button onclick="submitSurvey()">Submit</button>
+        <p id="surveyFeedback"></p>
+    </div>
+
+    <!-- Meeting Scheduling Page -->
+    <div id="schedule" class="page hidden">
+        <h2>Schedule a Meeting with HR</h2>
+        <label>Date: <input type="date" id="meetingDate"></label><br>
+        <label>Time: <input type="time" id="meetingTime"></label><br>
+        <button onclick="scheduleMeeting()">Schedule</button>
+        <p id="scheduleFeedback"></p>
+    </div>
+</div>
+
+<script>
+    function showPage(page) {
+        document.querySelectorAll('.page').forEach(div => div.classList.add('hidden'));
+        document.getElementById(page).classList.remove('hidden');
+    }
+
+    function submitSurvey() {
+        const response = document.getElementById('surveyResponse').value;
+        document.getElementById('surveyFeedback').textContent = `Thank you for your feedback: "${response}".`;
+    }
+
+    function scheduleMeeting() {
+        const date = document.getElementById('meetingDate').value;
+        const time = document.getElementById('meetingTime').value;
+        if(date && time){
+            document.getElementById('scheduleFeedback').textContent = `Meeting scheduled for ${date} at ${time}.`;
+        } else {
+            document.getElementById('scheduleFeedback').textContent = `Please select both date and time.`;
+        }
+    }
+</script>
+
+</body>
+</html>
